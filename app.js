@@ -1,6 +1,6 @@
-$(function () {
+$(function () { // call the function after the DOM is fully loaded
     var timeWindow = moment().hour(); // get current time
-    $('.time-block').each(function () {
+    $('.time-block').each(function () { // for each time slot 
         var idString = $(this).attr('id'); // get Id value
         var timeSlot = idString * 1; // convert the string to number
         //console.log(timeSlot);
@@ -19,15 +19,19 @@ $(function () {
 
         $(buttonId).click(function () {  // set a click function to get the textarea content
 
-            var newEntry = $(dataTime).val();
+            var idString = $(this).attr('id'); // get Id value
+            var timeSlot = idString * 1; // convert the string to number
 
-            localStorage.setItem('newEntry', JSON.stringify(newEntry));
+            var newEntry = $(dataTime).val(); //get the value of new data entry
+
+            localStorage.setItem(timeSlot, JSON.stringify(newEntry)); // save each time slote data entry in a separate array
 
         });
 
-        var printedData = localStorage.getItem('newEntry');
+        var printedData = localStorage.getItem(timeSlot); // retrived each saved local store data
 
-        $(this).find(dataTime).text(JSON.parse(printedData));
+        $(this).find(dataTime).text(JSON.parse(printedData)); // printed as placeholder
     });
+
 
 });
